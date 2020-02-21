@@ -44,6 +44,7 @@ public class AnimationApp {
 		printCurrentState();
 	}
 	
+	//Not final main
 	public static void main(String[] args) {
 		AnimationApp Start = new AnimationApp();
 		boolean run = true;
