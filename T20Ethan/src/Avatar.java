@@ -17,69 +17,71 @@ public class Avatar {
 	}
 	
 	//REQUIREMENT : char direction must be capitalized.
-	//EDIT: I just realized try/catch doesn't do anything here since
-	//It's just integers and not actually moving anywhere on the array.
-	//Removed.
-	private void move(char direction) {
+	//EDIT: Returns a new object with new coordinates to avoid privacy leak
+	public Avatar move(char direction) {
+		int newX = this.xCoord;
+		int newY = this.yCoord;
 		int movement = direction;
 		switch(movement) {
 		//Direction = 'U'
 		case 85:
 			//x,y
-			yCoord -= 1;
+			newY -= 1;
 			//If out of bounds, reverse the change.
-			if (yCoord <= -1 || yCoord >= 14) {
-				yCoord += 1;
+			if (newY <= -1 || newY >= 15) {
+				newY += 1;
 			}
-			break;
+			return(new Avatar(newX, newY));
 		//Direction = 'D'
 		case 68:
 			//x,y
-			yCoord += 1;
-			if (yCoord <= -1 || yCoord >= 14) {
-					yCoord -= 1;
+			newY += 1;
+			if (newY <= -1 || newY >= 15) {
+					newY -= 1;
 			}
-			break;
+			return(new Avatar(newX, newY));
 		//Direction = 'R'
 		case 76:
-			xCoord -= 1;
-			if (xCoord <= -1 || xCoord >= 14) {
-					xCoord += 1;
+			newX -= 1;
+			if (newX <= -1 || newX >= 10) {
+					newX += 1;
 			}
-			break;
+			return(new Avatar(newX, newY));
 		//Direction = 'L'
 		case 82:
-			xCoord += 1;
-			if (xCoord <= -1 || xCoord >= 14) {
-					xCoord -= 1;
+			newX += 1;
+			if (newX <= -1 || newX >= 10) {
+					newX -= 1;
 			}
-			break;
+			return(new Avatar(newX, newY));
+		default:
+			return(new Avatar(newX, newY));
 		}
 	}
 	
 	//getLocation() --> X and Y
-	private int getXCoord() {
+	public int getXCoord() {
 		return(xCoord);
 	}
 	
-	private int getYCoord() {
+	public int getYCoord() {
 		return(yCoord);
 	}
 	
 	//Update Score: 'change' will have to be positive
 	//when moving forwards, and negative when moving back.
-	private void updateScore(int change) {
+	public void updateScore(int change) {
 		score += change;
 	}
 	
-	//Update Health: 'change' should be a positive integer.
-	//Subtracts from the total amount of health (3)
-	private void updateHealth(int change) {
-		health -= change;
+	//Update Health: Setter method.
+	public void updateHealth(int change) {
+		health = change;
 	}
 	
-	private int getHealth() {
+	public int getHealth() {
 		return(health);
 	}
 	
 }
+
