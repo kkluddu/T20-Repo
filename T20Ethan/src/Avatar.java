@@ -40,14 +40,14 @@ public class Avatar {
 					newY -= 1;
 			}
 			return(new Avatar(newX, newY));
-		//Direction = 'R'
+		//Direction = 'L'
 		case 76:
 			newX -= 1;
 			if (newX <= -1 || newX >= 10) {
 					newX += 1;
 			}
 			return(new Avatar(newX, newY));
-		//Direction = 'L'
+		//Direction = 'R'
 		case 82:
 			newX += 1;
 			if (newX <= -1 || newX >= 10) {
