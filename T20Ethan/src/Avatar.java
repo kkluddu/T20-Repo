@@ -83,5 +83,12 @@ public class Avatar {
 		return(health);
 	}
 	
+	//Resets position of the frog
+	public Avatar resetPos() {
+		final int originX = 6;
+		final int originY = 14;
+		return(new Avatar(originX, originY));
+	}
+	
 }
 
