@@ -35,39 +35,6 @@ public class AnimationApp {
 		//Then move on. If the space is (2), it means the frog died and we should run something like
 		//The isDeadly() code below.
 		
-		newBoard[avatar.getYCoord()][avatar.getXCoord()] = 1;
-		//if (isDeadly()) {
-			//newBoard[avatar.getYCoord()][avatar.getXCoord()] = 2; -- "Obstacle" takes priority over frog
-			//If the conditional above already does this, then just remove the line.
-		
-			//avatar = avatar.resetPos();  -- Reset object to starting pt.
-			//CurrentX = avatar.getXCoord(); -- Setters for private variables back to starting pt
-			//CurrentY = avatar.getYCoord();
-		//} else {  -- If the square isn't deadly and frog still exists, just take new coordinates.
-		CurrentX = avatar.getXCoord();
-		CurrentY = avatar.getYCoord();
-		//}
-		
-		return(newBoard);
-	}
-	
-	public void initialize() {
-		
-		Scanner keyboard = new Scanner(System.in);
-		String uInput = "";
-		
-		System.out.print("Please enter a direction(U,D,L,R): ");
-		uInput = keyboard.nextLine();
-		
-		this.board = processAvatarMove(uInput);
-		printCurrentState();
-	}
-	
-	//Not final main
-	public static void main(String[] args) {
-		AnimationApp Start = new AnimationApp();
-		boolean run = true;
-		
 		//This applies to collectible one (the frog (0) collectible that moves with the frog)
 				char moveDirection = 'R';   
 				if (collectible.get(0).overlapsWith(avatar)) {
@@ -92,11 +59,18 @@ public class AnimationApp {
 				        }
 
 				        }
-
-
-				//Obstacles section
-
-				for (int i =0 ; i < obstacle.size(); i++){
+		
+		newBoard[avatar.getYCoord()][avatar.getXCoord()] = 1;
+		//if (isDeadly()) {
+			//newBoard[avatar.getYCoord()][avatar.getXCoord()] = 2; -- "Obstacle" takes priority over frog
+			//If the conditional above already does this, then just remove the line.
+		
+			//avatar = avatar.resetPos();  -- Reset object to starting pt.
+			//CurrentX = avatar.getXCoord(); -- Setters for private variables back to starting pt
+			//CurrentY = avatar.getYCoord();
+		//} else {  -- If the square isn't deadly and frog still exists, just take new coordinates.
+		
+		for (int i =0 ; i < obstacle.size(); i++){
 				    obstacle = obstacle.get(i);
 				    if(obstacle.isDeadly()){
 
@@ -104,20 +78,39 @@ public class AnimationApp {
 				                //reset to start. Frog died. There needs to be a reset method for the avatar class
 				                //that moves the avatar back to the start. 
 				            	avatar.resetPos();
-
 				                }
-
-
 				        }else {
 				            if(obstacle.overlapsWith(avatar)){
 				            //the avatar should move with the obstacle (the log)
 				            obstacle.move();
 				            }
-
-
 				            }
-
 				    }
+
+		CurrentX = avatar.getXCoord();
+		CurrentY = avatar.getYCoord();
+		//}
+		
+		return(newBoard);
+	}
+	
+	public void initialize() {
+		
+		Scanner keyboard = new Scanner(System.in);
+		String uInput = "";
+		
+		System.out.print("Please enter a direction(U,D,L,R): ");
+		uInput = keyboard.nextLine();
+		
+		this.board = processAvatarMove(uInput);
+		printCurrentState();
+	}
+	
+	//Not final main
+	public static void main(String[] args) {
+		AnimationApp Start = new AnimationApp();
+		boolean run = true;
+		
 
 				Start.printCurrentState();
 				while(run) {
