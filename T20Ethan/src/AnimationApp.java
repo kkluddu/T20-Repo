@@ -7,8 +7,8 @@ public class AnimationApp {
 	private int CurrentY = 14;
 	private Avatar avatar = new Avatar(CurrentX, CurrentY);
 	//Not yet implemented
-	//private ArrayList<Collectible> collectibles = new ArrayList<Collectible>
-	//private ArrayList<Obstacle> obstacles = new ArrayList<Obstacle>
+	private ArrayList<Collectible> collectibles = new ArrayList<Collectible>();
+	private ArrayList<Obstacle> obstacles = new ArrayList<Obstacle>();
 	private int[][] board = new int[15][10];
 	
 	public AnimationApp() {
@@ -67,6 +67,61 @@ public class AnimationApp {
 	public static void main(String[] args) {
 		AnimationApp Start = new AnimationApp();
 		boolean run = true;
+		
+		//This applies to collectible one (the frog (0) collectible that moves with the frog)
+				char moveDirection = 'R';   
+				if (collectible.get(0).overlapsWith(avatar)) {
+				    avatar.move(moveDirection);
+				    //Need to add variable -collectibleAttained: boolean (default: false) to the Collectible class
+				    if (collectible.get(0).collectibleAttained == false){
+				            avatar.updateScore(collectible.get(0).scoreBoost);
+				            collectible.get(0).collectibleAttained = true;
+				            collectible.get(0).updateLocation(avatar.CurrentX, avatar.CurrentY);
+				        }else{
+
+				        avatar.move(moveDirection); }
+				}
+
+				//This applies to collectible two (the fly (1) on the last row of the board)     
+				if (collectable.get(1).overlapsWith(avatar)) {
+				    collectible.get(0).collectibleAttained = false;
+				    //Update other variables and reset to start of the game
+				    avatar.resetPos();
+				    if (collectible.get(1).collectibleAttained == false){
+				            avatar.updateScore(collectible.get(1).scoreBoost);
+				        }
+
+				        }
+
+
+				//Obstacles section
+
+				for (int i =0 ; i < obstacle.size(); i++){
+				    obstacle = obstacle.get(i);
+				    if(obstacle.isDeadly()){
+
+				            if (obstacle.overlapsWith(avatar)){
+				                //reset to start. Frog died. There needs to be a reset method for the avatar class
+				                //that moves the avatar back to the start. 
+				            	avatar.resetPos();
+
+				                }
+
+
+				        }else {
+				            if(obstacle.overlapsWith(avatar)){
+				            //the avatar should move with the obstacle (the log)
+				            obstacle.move();
+				            }
+
+
+				            }
+
+				    }
+
+				Start.printCurrentState();
+				while(run) {
+					Start.initialize();
 		
 		Start.printCurrentState();
 		while(run) {
